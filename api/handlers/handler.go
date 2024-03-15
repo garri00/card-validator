@@ -31,7 +31,7 @@ func respond(rw http.ResponseWriter, log zerolog.Logger, data any) {
 
 func respondErr(rw http.ResponseWriter, log zerolog.Logger, err error, statusCode int) {
 	log.Debug().Err(err).Msg("responding with error")
-	http.Error(rw, err.Error(), http.StatusInternalServerError)
+	http.Error(rw, err.Error(), statusCode)
 }
 
 // decodeBody reads data from a body and converts it to any
