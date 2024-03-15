@@ -1,0 +1,10 @@
+# IDE files
+.idea/
+.vscode/
+
+# Binaries & produced files/ Test fiels
+release/
+test/
+
+# Environment
+#.env
