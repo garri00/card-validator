@@ -28,6 +28,8 @@ func main() {
 		ReadHeaderTimeout: 3 * time.Second,
 	}
 
+	logger.Log.Info().Msgf("host:%s, port:%s", configs.Host, configs.Port)
+
 	if err := server.ListenAndServe(); err != nil {
 		logger.Log.Fatal().Msg("server crashed")
 	}

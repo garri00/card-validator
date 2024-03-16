@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -36,12 +35,6 @@ func (c CarValidationHandler) CardValidation(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	err := json.NewDecoder(r.Body).Decode(&cardRequest)
-	if err != nil {
-		respondErr(w, c.log, err, http.StatusBadRequest)
-		return
-	}
-
 	card, err := cardRequestToCard(cardRequest)
 	if err != nil {
 		respondErr(w, c.log, err, http.StatusBadRequest)
@@ -50,7 +43,7 @@ func (c CarValidationHandler) CardValidation(w http.ResponseWriter, r *http.Requ
 
 	resp, err := c.cardValidationUseCase.ValidateCard(card)
 	if err != nil {
-		respondErr(w, c.log, err, http.StatusBadRequest)
+		respond(w, c.log, resp)
 		return
 	}
 

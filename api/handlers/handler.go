@@ -15,6 +15,9 @@ func respond(rw http.ResponseWriter, log zerolog.Logger, data any) {
 		return
 	}
 
+	rw.Header().Set("Content-Type", "application/json")
+	rw.WriteHeader(http.StatusOK)
+
 	var buf bytes.Buffer
 	if err := encodeBody(&buf, data); err != nil {
 		err = fmt.Errorf("encoding to buffer: %w", err)
